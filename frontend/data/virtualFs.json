@@ -1,0 +1,30 @@
+{
+  "name": "/",
+  "type": "folder",
+  "children": [
+    {
+      "name": "Documents",
+      "type": "folder",
+      "children": [
+        {
+          "name": "Projects",
+          "type": "folder",
+          "children": [
+            {
+              "name": "demo.js",
+              "type": "file",
+              "cid": "QmNewCID1",
+              "timestamp": "2025-07-04T17:03:43.378Z"
+            }
+          ]
+        },
+        {
+          "name": "readme.txt",
+          "type": "file",
+          "cid": "QmNewCID2",
+          "timestamp": "2025-07-04T17:03:43.403Z"
+        }
+      ]
+    }
+  ]
+}

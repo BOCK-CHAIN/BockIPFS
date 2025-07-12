@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050816;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --font-sans: var(--font-geist-sans);
+}
+
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+}
+
+body {
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
