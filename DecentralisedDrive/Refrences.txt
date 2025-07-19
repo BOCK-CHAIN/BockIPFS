@@ -1,0 +1,168 @@
+1. Install go and check version
+2. go install github.com/ipfs/kubo/v2@latest (If ipfs is not recognized after install, add it to your environment PATH)
+3. Prioritise tdm gcc compiler using:  $env:Path = "C:\TDM-GCC-64\bin;" + $env:Path
+4. go install github.com/ipfs/kubo/cmd/ipfs@latest
+5. Copy-Item "$env:USERPROFILE\go\bin\ipfs.exe" "$env:USERPROFILE\go\bin\local-ipfs.exe" and verify using local-ipfs version
+6. In terminal:  local-ipfs config Addresses.API /ip4/127.0.0.1/tcp/5001
+                 local-ipfs config Addresses.Gateway /ip4/127.0.0.1/tcp/8080
+                 local-ipfs bootstrap rm --all
+
+
+8. notepad $env:USERPROFILE\.ipfs\config       : in terminal
+   in notepad: 
+"API": {
+  "HTTPHeaders": {
+    "Access-Control-Allow-Origin": [
+      "*"
+    ],
+    "Access-Control-Allow-Methods": [
+      "GET",
+      "POST",
+      "PUT"
+    ]
+  }
+},
+9. notepad swarm.key
+   In notepad: 
+/key/swarm/psk/1.0.0/
+/base16/
+111122223333444455556666777788889999aaaabbbbccccddddeeeeffff0000
+10. Find your IPFS repo directory: usually C:\Users\<USERNAME>\.ipfs and run Test-Path $env:USERPROFILE\.ipfs which should return True
+11. Move-Item -Path "C:\Users\<USERNAME>\Documents\Path to swarm key" -Destination "$env:USERPROFILE\.ipfs\swarm.key"
+12. notepad $env:USERPROFILE\.ipfs\config      in terminal where changes to be made are 
+"Routing": {
+  "Type": "dht"
+}
+
+"AutoTLS": {
+  "Enabled": false
+}
+
+"Swarm": {
+  ...
+  "Transports": {
+    "Network": {
+      "Websocket": false
+    }
+  }
+}
+
+13. Restart daemon: local-ipfs daemon
+14. Test upload and retrive:
+Upload a file:
+
+local-ipfs add hello.txt
+
+local-ipfs cat <CID>
+Or open:
+http://127.0.0.1:8080/ipfs/<CID> in the browser
+
+15. Run the Dapp
+
+
+
+Week 2 and 3: folder structure 
+Phase 1: Folder & File Structure Design
+Decide on virtual folder representation (DAG of JSON or UnixFS directories).
+
+Define metadata schema: filename, CID, type, createdAt, owner, parentFolder.
+
+Build a recursive folder-node model.
+
+Phase 2: Upload & DAG Construction
+Create a frontend file/folder uploader.
+
+Wrap files in a directory DAG using ipfs.add({ path, content }, { wrapWithDirectory: true }).
+
+Capture resulting root CID for folder.
+
+Phase 3: Metadata Storage
+Store virtual filesystem metadata as a JSON index in IPFS.
+
+Include folder hierarchy, file locations (CIDs), and timestamps.
+
+Update and reupload index on change.
+
+Phase 4: File Retrieval Logic
+Load and parse index file (JSON).
+
+Use CID to fetch file or folder contents from IPFS.
+
+Render folder view and preview files in UI.
+
+Phase 5: Optional Enhancements
+Implement rename/move/delete logic by updating and reuploading index.
+
+Add file type icons, upload progress, size limits, etc.
+
+Cache commonly accessed metadata locally for speed.
+
+Phase 1:
+1. enter types/filesystem.tx : Here the structure of the filesystem is decided
+2. Add utils for adding a folder, adding a file and listing it
+3. Add utils/saveVirtualFs.ts
+4. npm install --save-dev ts-node typescript @types/node
+5. node --loader ts-node/esm scripts/printVirtualFs.ts
+
+
+✅ Implemented Modules
+utils/virtualFs.ts
+Core virtual filesystem logic.
+
+Functions: createVirtualFs, addFolder, addFile, getByPath.
+
+utils/saveVirtualFs.ts
+Saves current VFS state to disk (/data/virtualFs.json).
+
+utils/loadVirtualFs.ts
+Loads the virtual filesystem from disk if it exists.
+
+If not found or invalid, it creates and saves a new root.
+
+🧪 Scripts for Testing
+scripts/manageVirtualFs.ts
+Adds folders and files using utility functions.
+
+Saves and prints the updated FS.
+
+Run with:
+
+bash
+Copy
+Edit
+node --loader ts-node/esm scripts/manageVirtualFs.ts
+Expected Output:
+
+json
+Copy
+Edit
+{
+  "name": "/",
+  "type": "folder",
+  "children": [
+    {
+      "name": "Documents",
+      "type": "folder",
+      "children": [
+        {
+          "name": "Projects",
+          "type": "folder",
+          "children": [
+            {
+              "name": "demo.js",
+              "type": "file",
+              "cid": "QmNewCID1",
+              "timestamp": "2025-07-04T17:03:43.378Z"
+            }
+          ]
+        },
+        {
+          "name": "readme.txt",
+          "type": "file",
+          "cid": "QmNewCID2",
+          "timestamp": "2025-07-04T17:03:43.403Z"
+        }
+      ]
+    }
+  ]
+}

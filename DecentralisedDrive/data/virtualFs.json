@@ -1,0 +1,100 @@
+{
+  "name": "/",
+  "type": "folder",
+  "children": [
+    {
+      "name": "Documents",
+      "type": "folder",
+      "children": [
+        {
+          "name": "Projects",
+          "type": "folder",
+          "children": [
+            {
+              "name": "demo.js",
+              "type": "file",
+              "cid": "QmNewCID1",
+              "timestamp": "2025-07-04T17:03:43.378Z"
+            },
+            {
+              "name": "demo1.js",
+              "type": "file",
+              "cid": "QmNewCID1",
+              "timestamp": "2025-07-04T17:03:43.378Z"
+            }
+          ]
+        },
+        {
+          "name": "readme.txt",
+          "type": "file",
+          "cid": "QmNewCID2",
+          "timestamp": "2025-07-04T17:03:43.403Z"
+        },
+        {
+          "name": "NewFolder",
+          "type": "folder",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "NewFolder",
+      "type": "folder",
+      "children": []
+    },
+    {
+      "name": "NewFolder1",
+      "type": "folder",
+      "children": []
+    },
+    {
+      "name": "projects",
+      "type": "folder",
+      "children": [
+        {
+          "name": "newFolder",
+          "type": "folder",
+          "children": []
+        },
+        {
+          "name": "demo",
+          "type": "file",
+          "timestamp": "2025-07-19T07:40:54.939Z"
+        }
+      ]
+    },
+    {
+      "name": "new",
+      "type": "folder",
+      "children": []
+    },
+    {
+      "name": "image1.png",
+      "type": "file",
+      "cid": "QmdUKyKhQUAFoCc5kSScBZ2Zh7ADMbC56KyahPRW4tzRGq",
+      "timestamp": "2025-07-19T08:18:57.438Z"
+    },
+    {
+      "name": "image2.png",
+      "type": "file",
+      "cid": "Qmd4aYaVrQvaxb6mRVGE5CeNsxJerDVYFaeMcaGLk5J3T1",
+      "timestamp": "2025-07-19T08:35:09.225Z"
+    },
+    {
+      "name": "test",
+      "type": "folder",
+      "children": []
+    },
+    {
+      "name": "t",
+      "type": "folder",
+      "children": []
+    },
+    {
+      "name": "image3.png",
+      "type": "file",
+      "cid": "QmXkfVn1M6unSbJxm7Bg4vwZpagwbwfCn3CFhhG4b6nh84",
+      "timestamp": "2025-07-19T08:38:23.282Z"
+    }
+  ]
+}
